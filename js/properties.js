@@ -3,7 +3,7 @@
 const STATUS_LABELS = { "for-sale": "For Sale", "for-rent": "For Rent", sold: "Sold" };
 
 function detailUrl(id) {
-  return `listing/${id}.html`;
+  return `property.html?id=${id}`;
 }
 
 function sortActiveFirst(list) {
@@ -54,14 +54,26 @@ function renderPropertyGrid(containerId, list) {
   const el = document.getElementById(containerId);
   if (!el) return;
   if (!list.length) {
-    el.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${ICONS.home}<p>No properties match these filters right now. Try adjusting your search or contact Kamran Abbasi directly.</p></div>`;
+    el.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${ICONS.home}<p>No properties found right now. Check back soon, or contact Kamran Abbasi directly.</p></div>`;
     return;
   }
   el.innerHTML = sortActiveFirst(list).map(renderPropertyCard).join("");
 }
 
+function renderLoadingState(containerId, label) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><p>${label || "Loading properties…"}</p></div>`;
+}
+
+function renderErrorState(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${ICONS.home}<p>We couldn't load listings right now. Please check your connection and try again, or contact Kamran Abbasi directly.</p></div>`;
+}
+
 function propertyUrl(p) {
-  return `https://${BUSINESS.domain}/listing/${p.id}.html`;
+  return `https://${BUSINESS.domain}/property.html?id=${p.id}`;
 }
 
 function propertyShareText(p) {

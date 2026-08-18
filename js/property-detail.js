@@ -1,22 +1,30 @@
-/* Renders a single property detail page. Reads id from body[data-id] first, then ?id= query param. */
+/* Renders a single property detail page, fetched from Supabase by ?id= */
 
 function similarPropertyWaMessage(p) {
   return `Hi, I saw that "${p.title}" in ${p.location} has been sold. I'm looking for something similar — can you help?`;
 }
 
 function getPropertyId() {
-  const bodyId = document.body.dataset.id;
-  if (bodyId) return bodyId;
   const params = new URLSearchParams(window.location.search);
   return params.get("id");
 }
 
-function renderPropertyDetail() {
-  const id = getPropertyId();
-  const p = PROPERTIES.find((x) => x.id === id);
+async function renderPropertyDetail() {
   const root = document.getElementById("property-detail-root");
+  const id = getPropertyId();
+
+  if (!id) {
+    root.innerHTML = `<div class="empty-state">${ICONS.home}<p>This listing could not be found. <a href="properties.html">Browse all properties</a>.</p></div>`;
+    return;
+  }
+
+  root.innerHTML = `<div class="empty-state"><p>Loading property…</p></div>`;
+  const p = await fetchPropertyById(id);
+
   if (!p) {
-    root.innerHTML = `<div class="empty-state">${ICONS.home}<p>This listing could not be found. <a href="../properties.html">Browse all properties</a>.</p></div>`;
+    root.innerHTML = propertiesLoadError
+      ? `<div class="empty-state">${ICONS.home}<p>We couldn't load this listing right now. Please check your connection and try again, or contact Kamran Abbasi directly.</p></div>`
+      : `<div class="empty-state">${ICONS.home}<p>This listing could not be found. <a href="properties.html">Browse all properties</a>.</p></div>`;
     return;
   }
 
@@ -26,7 +34,7 @@ function renderPropertyDetail() {
   const soldClass = p.status === "sold" ? "sold" : "";
 
   root.innerHTML = `
-    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../properties.html">Properties</a> / ${p.title}</div>
+    <div class="breadcrumb"><a href="index.html">Home</a> / <a href="properties.html">Properties</a> / ${p.title}</div>
 
     <div class="gallery-main">
       <img id="galleryMain" src="${p.images[0]}" alt="${p.title}">
@@ -54,12 +62,16 @@ function renderPropertyDetail() {
     <div class="two-col" style="margin-top:30px;">
       <div>
         <h2>Description</h2>
-        <p style="color:var(--text);">${p.description}</p>
+        <p style="color:var(--text);">${p.description || "No description provided yet."}</p>
 
-        <h2 style="margin-top:30px;">Features &amp; Amenities</h2>
+        ${
+          p.features.length
+            ? `<h2 style="margin-top:30px;">Features &amp; Amenities</h2>
         <ul class="features-list">
           ${p.features.map((f) => `<li>${ICONS.check} ${f}</li>`).join("")}
-        </ul>
+        </ul>`
+            : ""
+        }
 
         ${p.videoUrl ? `<h2 style="margin-top:30px;">Video Tour</h2><div class="video-wrap"><iframe src="${p.videoUrl}" title="Property video tour" allowfullscreen></iframe></div>` : ""}
 

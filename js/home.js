@@ -1,29 +1,26 @@
 function renderNeighbourhoods() {
   const el = document.getElementById("neighbourhoodsGrid");
   if (!el) return;
-  el.innerHTML = NEIGHBOURHOODS.map(
-    (n) => `
+  el.innerHTML = NEIGHBOURHOOD_INFO.map((n) => {
+    const count = PROPERTIES.filter((p) => p.location.toLowerCase().includes(n.match)).length;
+    return `
     <div class="neigh-card">
       <img src="${n.image}" alt="${n.name}" loading="lazy">
       <div class="overlay">
-        <span class="count-badge">${n.count}+ Listings</span>
+        <span class="count-badge">${count}+ Listings</span>
         <h3>${n.name}</h3>
         <p>${n.tagline}</p>
       </div>
-    </div>`
-  ).join("");
+    </div>`;
+  }).join("");
 }
 
 function renderFeatured() {
-  const el = document.getElementById("featuredGrid");
-  if (!el) return;
   const list = PROPERTIES.filter((p) => p.featured);
   renderPropertyGrid("featuredGrid", list);
 }
 
 function renderRecentSold() {
-  const el = document.getElementById("recentSoldGrid");
-  if (!el) return;
   renderPropertyGrid("recentSoldGrid", getRecentSold(3));
 }
 
@@ -45,9 +42,21 @@ function wireSearchBar() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+async function initHomeListings() {
+  renderLoadingState("featuredGrid", "Loading featured properties…");
+  renderLoadingState("recentSoldGrid", "Loading…");
+  await loadProperties();
+  if (propertiesLoadError) {
+    renderErrorState("featuredGrid");
+    renderErrorState("recentSoldGrid");
+    return;
+  }
   renderNeighbourhoods();
   renderFeatured();
   renderRecentSold();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
   wireSearchBar();
+  initHomeListings();
 });

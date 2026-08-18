@@ -20,7 +20,7 @@ function applyPropertyFilters() {
 
   const filtered = PROPERTIES.filter((p) => {
     if (type && p.type !== type) return false;
-    if (location && p.sector !== location) return false;
+    if (location && !p.location.toLowerCase().includes(location.toLowerCase())) return false;
     if (status && p.status !== status) return false;
     if (!priceInRange(p.price, price)) return false;
     if (q && !(p.title.toLowerCase().includes(q) || p.location.toLowerCase().includes(q))) return false;
@@ -31,7 +31,7 @@ function applyPropertyFilters() {
   document.getElementById("resultsCount").textContent = `${filtered.length} propert${filtered.length === 1 ? "y" : "ies"} found`;
 }
 
-function initPropertiesPage() {
+async function initPropertiesPage() {
   const params = new URLSearchParams(window.location.search);
   if (params.get("type")) document.getElementById("fType").value = params.get("type");
   if (params.get("location")) document.getElementById("fLocation").value = params.get("location");
@@ -43,6 +43,13 @@ function initPropertiesPage() {
   );
   document.getElementById("fSearch").addEventListener("input", applyPropertyFilters);
 
+  renderLoadingState("propertiesGrid", "Loading properties…");
+  document.getElementById("resultsCount").textContent = "";
+  await loadProperties();
+  if (propertiesLoadError) {
+    renderErrorState("propertiesGrid");
+    return;
+  }
   applyPropertyFilters();
 }
 
