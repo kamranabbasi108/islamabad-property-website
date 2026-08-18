@@ -9,7 +9,9 @@ const BUSINESS = {
   address: "LG 50, Gulberg Trade Centre, Business Park, Gulberg Greens, Islamabad — 440000",
   tagline: "Where Your Future Begins",
   domain: "kamranproperty.com",
-  youtube: "https://www.youtube.com/@Homespk/videos",
+  facebook: "https://www.facebook.com/share/1Eu5KTfqS9/",
+  instagram: "https://www.instagram.com/kamranabbasi240",
+  youtube: "https://youtube.com/@kamranabbasivlogs",
 };
 
 function waLink(number, message) {
