@@ -27,36 +27,42 @@
         <h1>Find Your <span class="accent-italic">Perfect Property</span></h1>
         <p class="subtitle">Expert guidance for Gulberg Greens, Gulberg Islamabad &amp; DHA Islamabad — led by Kamran Abbasi</p>
 
-        <form class="search-bar" id="heroSearch">
-          <select id="searchType" aria-label="Property Type">
-            <option value="">Property Type</option>
-            <option value="House">House</option>
-            <option value="Plot">Plot</option>
-            <option value="Flat">Flat</option>
-            <option value="Farmhouse">Farmhouse</option>
-            <option value="Commercial">Commercial</option>
-          </select>
-          <div class="divider"></div>
-          <select id="searchLocation" aria-label="Location">
-            <option value="">Location</option>
-            <option value="Gulberg Greens">Gulberg Greens</option>
-            <option value="DHA Islamabad">DHA Islamabad</option>
-          </select>
-          <div class="divider"></div>
-          <select id="searchPurpose" aria-label="Purpose">
-            <option value="">Buy or Rent</option>
-            <option value="for-sale">Buy</option>
-            <option value="for-rent">Rent</option>
-          </select>
-          <div class="divider"></div>
-          <select id="searchPrice" aria-label="Price Range">
-            <option value="">Price Range</option>
-            <option value="under-2000000">Under 20 Lac</option>
-            <option value="2000000-10000000">20 Lac – 1 Crore</option>
-            <option value="10000000-50000000">1 – 5 Crore</option>
-            <option value="50000000-plus">5 Crore+</option>
-          </select>
-          <button type="submit" class="btn btn-primary">Search Properties</button>
+        <form class="hero-sentence" id="heroSearch">
+          <div class="hero-sentence-box">
+            <p>I am looking to
+              <select id="searchPurpose" aria-label="Buy or Rent">
+                <option value="">Buy or Rent</option>
+                <option value="for-sale">Buy</option>
+                <option value="for-rent">Rent</option>
+              </select>
+              a
+              <select id="searchType" aria-label="Property Type">
+                <option value="">Any Type</option>
+                <option value="House">House</option>
+                <option value="Plot">Plot</option>
+                <option value="Flat">Flat</option>
+                <option value="Farmhouse">Farmhouse</option>
+                <option value="Commercial">Commercial</option>
+              </select>
+            </p>
+            <p>in
+              <select id="searchLocation" aria-label="Location">
+                <option value="">Any Location</option>
+                <option value="Gulberg Greens">Gulberg Greens</option>
+                <option value="DHA Islamabad">DHA Islamabad</option>
+              </select>
+            </p>
+            <p>at the price of
+              <select id="searchPrice" aria-label="Price Range">
+                <option value="">Any Price</option>
+                <option value="under-2000000">Under 20 Lac</option>
+                <option value="2000000-10000000">20 Lac – 1 Crore</option>
+                <option value="10000000-50000000">1 – 5 Crore</option>
+                <option value="50000000-plus">5 Crore+</option>
+              </select>
+            </p>
+          </div>
+          <button type="submit" class="btn btn-hero-outline">Search Properties</button>
         </form>
       </div>
     </div>
