@@ -1,5 +1,9 @@
 /* Renders a single property detail page. Reads id from body[data-id] first, then ?id= query param. */
 
+function similarPropertyWaMessage(p) {
+  return `Hi, I saw that "${p.title}" in ${p.location} has been sold. I'm looking for something similar — can you help?`;
+}
+
 function getPropertyId() {
   const bodyId = document.body.dataset.id;
   if (bodyId) return bodyId;
@@ -83,10 +87,18 @@ function renderPropertyDetail() {
               <div style="font-size:0.82rem; color:var(--muted);">${BUSINESS.name}</div>
             </div>
           </div>
+          ${
+            p.status === "sold"
+              ? `
+          <p style="font-size:0.95rem; color:var(--text); background:rgba(178,58,58,0.08); border-radius:var(--radius-sm); padding:12px 14px; margin:0 0 14px;">This property has been sold by Homes PK Marketing.</p>
+          <a class="btn btn-whatsapp btn-block" href="${waLink(BUSINESS.whatsappNumbers[0], similarPropertyWaMessage(p))}" target="_blank" rel="noopener">${ICONS.whatsapp} Looking for something similar? Contact us</a>
+          <button class="btn btn-outline" data-share-id="${p.id}">${ICONS.share} Share Listing</button>`
+              : `
           <a class="btn btn-primary" href="tel:${BUSINESS.phones[0].replace(/-/g, "")}">${ICONS.phone} Call Now</a>
           <a class="btn btn-whatsapp" href="${waLink(BUSINESS.whatsappNumbers[0], propertyShareText(p))}" target="_blank" rel="noopener">${ICONS.whatsapp} WhatsApp ${BUSINESS.phones[0]}</a>
           <a class="btn btn-outline" href="${waLink(BUSINESS.whatsappNumbers[1], propertyShareText(p))}" target="_blank" rel="noopener">${ICONS.whatsapp} WhatsApp ${BUSINESS.phones[1]}</a>
-          <button class="btn btn-outline" data-share-id="${p.id}">${ICONS.share} Share Listing</button>
+          <button class="btn btn-outline" data-share-id="${p.id}">${ICONS.share} Share Listing</button>`
+          }
         </div>
 
         <div class="calc-box">
@@ -119,8 +131,13 @@ function renderPropertyDetail() {
     </div>
 
     <div class="sticky-call-bar enabled">
+      ${
+        p.status === "sold"
+          ? `<a class="btn btn-whatsapp btn-block" href="${waLink(BUSINESS.whatsappNumbers[0], similarPropertyWaMessage(p))}" target="_blank" rel="noopener">${ICONS.whatsapp} Looking for something similar? Contact us</a>`
+          : `
       <a class="btn btn-primary btn-block" href="tel:${BUSINESS.phones[0].replace(/-/g, "")}">${ICONS.phone} Call Now</a>
-      <a class="btn btn-whatsapp btn-block" href="${waLink(BUSINESS.whatsappNumbers[0], propertyShareText(p))}" target="_blank" rel="noopener">${ICONS.whatsapp} WhatsApp</a>
+      <a class="btn btn-whatsapp btn-block" href="${waLink(BUSINESS.whatsappNumbers[0], propertyShareText(p))}" target="_blank" rel="noopener">${ICONS.whatsapp} WhatsApp</a>`
+      }
     </div>
   `;
   document.body.classList.add("has-sticky-call");
