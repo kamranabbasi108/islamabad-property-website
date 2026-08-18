@@ -67,7 +67,7 @@ function buildNavbar(active, base) {
     <div class="container">
       <a href="${base}index.html" class="logo">
         ${ICONS.home}
-        <span>Homes PK Marketing<span class="tag">Where Your Future Begins</span></span>
+        <span>Homes PK <span class="accent-italic">Marketing</span></span>
       </a>
       <nav>
         <ul class="nav-links" id="navLinks">
@@ -102,8 +102,8 @@ function buildFooter(base) {
           <p style="max-width:280px; font-size:0.88rem;">${BUSINESS.tagline} — trusted property guidance for Gulberg Greens, Gulberg Islamabad &amp; DHA Islamabad.</p>
           <div class="social-row">
             <a href="${waLink(BUSINESS.whatsappNumbers[0], defaultWaMessage())}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICONS.whatsapp}</a>
-            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">${ICONS.facebook}</a>
-            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">${ICONS.instagram}</a>
+            <a href="${BUSINESS.facebook}" target="_blank" rel="noopener" aria-label="Facebook">${ICONS.facebook}</a>
+            <a href="${BUSINESS.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${ICONS.instagram}</a>
             <a href="${BUSINESS.youtube}" target="_blank" rel="noopener" aria-label="YouTube">${ICONS.youtube}</a>
           </div>
         </div>

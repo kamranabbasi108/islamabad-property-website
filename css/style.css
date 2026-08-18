@@ -156,7 +156,6 @@ section.tight { padding: 48px 0; }
   color: var(--white);
 }
 .logo svg { flex-shrink: 0; color: var(--accent); }
-.logo .tag { display: block; font-family: "Inter", sans-serif; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
 
 .nav-links {
   display: flex;
@@ -229,7 +228,6 @@ section.tight { padding: 48px 0; }
 @media (max-width: 480px) {
   .logo { font-size: 0.95rem; gap: 6px; }
   .logo svg { width: 20px; height: 20px; }
-  .logo .tag { font-size: 0.58rem; }
   .navbar .container { gap: 6px; padding: 0 14px; }
   .nav-right { gap: 6px; }
   .nav-right .btn-sm { padding: 8px 14px; font-size: 0.8rem; }
@@ -250,43 +248,70 @@ section.tight { padding: 48px 0; }
 .hero h1 { color: var(--white); }
 .hero p.subtitle {
   color: #FFFFFF;
-  background: rgba(15, 30, 56, 0.55);
-  display: inline-block;
-  padding: 10px 18px;
-  border-radius: var(--radius-sm);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   margin: 16px 0 36px;
   font-weight: 500;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  max-width: 600px;
 }
 
-.search-bar {
-  background: var(--white);
-  border-radius: var(--radius-pill);
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: var(--shadow);
-  flex-wrap: wrap;
+.hero-sentence { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+.hero-sentence-box {
+  background: rgba(15, 30, 56, 0.5);
+  border-radius: var(--radius);
+  padding: 26px 30px;
 }
-.search-bar select, .search-bar input {
-  border: none;
+.hero-sentence-box p {
+  color: var(--white);
+  font-family: "Playfair Display", serif;
+  font-size: 1.15rem;
+  margin: 0 0 14px;
+}
+.hero-sentence-box p:last-child { margin-bottom: 0; }
+.hero-sentence-box select {
+  appearance: none;
+  -webkit-appearance: none;
   background: transparent;
-  padding: 10px 14px;
-  font-family: "Inter", sans-serif;
-  font-size: 0.9rem;
-  color: var(--text);
-  flex: 1;
-  min-width: 130px;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.55);
+  color: var(--accent);
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  padding: 0 20px 4px 2px;
+  margin: 0 2px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237B8FE0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 2px center;
+  background-size: 13px;
 }
-.search-bar select:focus, .search-bar input:focus { outline: none; }
-.search-bar .divider { width: 1px; height: 26px; background: var(--card-border); }
-.search-bar .btn { flex-shrink: 0; }
+.hero-sentence-box select:focus { outline: none; }
+.hero-sentence-box select option { color: var(--text); font-style: normal; }
+
+.btn-hero-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(255,255,255,0.85);
+  background: transparent;
+  color: var(--white);
+  padding: 15px 38px;
+  border-radius: var(--radius-pill);
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-hero-outline:hover { background: rgba(255,255,255,0.14); }
 
 @media (max-width: 760px) {
-  .search-bar { flex-direction: column; align-items: stretch; border-radius: var(--radius); }
-  .search-bar .divider { display: none; }
-  .search-bar .btn { width: 100%; }
+  .hero-sentence-box { padding: 22px 22px; }
+  .hero-sentence-box p { font-size: 1rem; }
+  .btn-hero-outline { width: 100%; }
 }
 
 /* ---------- Filter pills (dropdowns) ---------- */
@@ -453,15 +478,31 @@ section.tight { padding: 48px 0; }
   text-shadow: 0 2px 8px rgba(0,0,0,0.55);
   z-index: 2;
 }
+.prop-image.sold-overlay img {
+  opacity: 0.78;
+  filter: saturate(0.85);
+}
+.prop-image.sold-overlay::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(15,30,56,0.28);
+  z-index: 1;
+}
 .prop-image.sold-overlay::after {
   content: "SOLD";
-  position: absolute; inset: 0;
-  background: rgba(15,30,56,0.55);
+  position: absolute;
+  top: 50%; left: -18%;
+  width: 136%;
+  transform: translateY(-50%) rotate(-8deg);
+  background: rgba(178, 58, 58, 0.9);
   color: var(--white);
-  display: flex; align-items: center; justify-content: center;
+  text-align: center;
   font-family: "Playfair Display", serif;
-  font-size: 2rem;
-  letter-spacing: 0.1em;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  padding: 7px 0;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.3);
   z-index: 1;
 }
 

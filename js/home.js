@@ -21,6 +21,12 @@ function renderFeatured() {
   renderPropertyGrid("featuredGrid", list);
 }
 
+function renderRecentSold() {
+  const el = document.getElementById("recentSoldGrid");
+  if (!el) return;
+  renderPropertyGrid("recentSoldGrid", getRecentSold(3));
+}
+
 function wireSearchBar() {
   const form = document.getElementById("heroSearch");
   if (!form) return;
@@ -28,12 +34,12 @@ function wireSearchBar() {
     e.preventDefault();
     const type = document.getElementById("searchType").value;
     const location = document.getElementById("searchLocation").value;
-    const purpose = document.getElementById("searchPurpose").value;
+    const status = document.getElementById("searchPurpose").value;
     const price = document.getElementById("searchPrice").value;
     const params = new URLSearchParams();
     if (type) params.set("type", type);
     if (location) params.set("location", location);
-    if (purpose) params.set("purpose", purpose);
+    if (status) params.set("status", status);
     if (price) params.set("price", price);
     window.location.href = `properties.html?${params.toString()}`;
   });
@@ -42,5 +48,6 @@ function wireSearchBar() {
 document.addEventListener("DOMContentLoaded", () => {
   renderNeighbourhoods();
   renderFeatured();
+  renderRecentSold();
   wireSearchBar();
 });

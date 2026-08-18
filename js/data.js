@@ -9,7 +9,9 @@ const BUSINESS = {
   address: "LG 50, Gulberg Trade Centre, Business Park, Gulberg Greens, Islamabad — 440000",
   tagline: "Where Your Future Begins",
   domain: "kamranproperty.com",
-  youtube: "https://www.youtube.com/@Homespk/videos",
+  facebook: "https://www.facebook.com/share/1Eu5KTfqS9/",
+  instagram: "https://www.instagram.com/kamranabbasi240",
+  youtube: "https://youtube.com/@kamranabbasivlogs",
 };
 
 function waLink(number, message) {
@@ -154,6 +156,7 @@ const PROPERTIES = [
     type: "House",
     purpose: "For Sale",
     status: "sold",
+    soldDate: "2026-06-15",
     beds: 5,
     baths: 6,
     area: "1 Kanal",
@@ -246,6 +249,7 @@ const PROPERTIES = [
     type: "Plot",
     purpose: "For Sale",
     status: "sold",
+    soldDate: "2026-03-02",
     beds: 0,
     baths: 0,
     area: "10 Marla",
@@ -255,6 +259,29 @@ const PROPERTIES = [
     description:
       "A residential plot in DHA Phase 2 successfully sold through Homes PK Marketing — another satisfied client added to our growing track record.",
     features: ["Sold by Homes PK Marketing", "Verified transaction"],
+    verified: true,
+    videoUrl: "",
+    featured: false,
+  },
+  {
+    id: "hpk-011",
+    title: "3 Bed Flat — Sold",
+    price: 19500000,
+    location: "DHA Phase 5, Islamabad",
+    sector: "DHA Islamabad",
+    type: "Flat",
+    purpose: "For Sale",
+    status: "sold",
+    soldDate: "2026-07-20",
+    beds: 3,
+    baths: 3,
+    area: "1800 Sqft",
+    images: [
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
+    ],
+    description:
+      "A well-appointed 3 bedroom flat in DHA Phase 5 sold through Homes PK Marketing — a recent addition to our track record of trusted transactions.",
+    features: ["Sold by Homes PK Marketing", "Verified transaction", "Full legal handling"],
     verified: true,
     videoUrl: "",
     featured: false,
