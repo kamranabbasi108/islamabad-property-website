@@ -67,7 +67,7 @@ function buildNavbar(active, base) {
     <div class="container">
       <a href="${base}index.html" class="logo">
         ${ICONS.home}
-        <span>Homes PK Marketing<span class="tag">Where Your Future Begins</span></span>
+        <span>Homes PK <span class="accent-italic">Marketing</span></span>
       </a>
       <nav>
         <ul class="nav-links" id="navLinks">
