@@ -14,16 +14,14 @@ function priceInRange(price, rangeKey) {
 function applyPropertyFilters() {
   const type = document.getElementById("fType").value;
   const location = document.getElementById("fLocation").value;
-  const purpose = document.getElementById("fPurpose").value;
+  const status = document.getElementById("fStatus").value;
   const price = document.getElementById("fPrice").value;
   const q = document.getElementById("fSearch").value.trim().toLowerCase();
 
   const filtered = PROPERTIES.filter((p) => {
     if (type && p.type !== type) return false;
     if (location && p.sector !== location) return false;
-    if (purpose === "For Sale" && p.purpose !== "For Sale") return false;
-    if (purpose === "For Rent" && p.purpose !== "For Rent") return false;
-    if (purpose === "Sold" && p.status !== "sold") return false;
+    if (status && p.status !== status) return false;
     if (!priceInRange(p.price, price)) return false;
     if (q && !(p.title.toLowerCase().includes(q) || p.location.toLowerCase().includes(q))) return false;
     return true;
@@ -37,10 +35,10 @@ function initPropertiesPage() {
   const params = new URLSearchParams(window.location.search);
   if (params.get("type")) document.getElementById("fType").value = params.get("type");
   if (params.get("location")) document.getElementById("fLocation").value = params.get("location");
-  if (params.get("purpose")) document.getElementById("fPurpose").value = params.get("purpose");
+  if (params.get("status")) document.getElementById("fStatus").value = params.get("status");
   if (params.get("price")) document.getElementById("fPrice").value = params.get("price");
 
-  ["fType", "fLocation", "fPurpose", "fPrice"].forEach((id) =>
+  ["fType", "fLocation", "fStatus", "fPrice"].forEach((id) =>
     document.getElementById(id).addEventListener("change", applyPropertyFilters)
   );
   document.getElementById("fSearch").addEventListener("input", applyPropertyFilters);

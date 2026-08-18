@@ -6,9 +6,20 @@ function detailUrl(id) {
   return `listing/${id}.html`;
 }
 
+function sortActiveFirst(list) {
+  return [...list].sort((a, b) => (a.status === "sold" ? 1 : 0) - (b.status === "sold" ? 1 : 0));
+}
+
+function getRecentSold(count) {
+  return PROPERTIES.filter((p) => p.status === "sold" && p.soldDate)
+    .sort((a, b) => new Date(b.soldDate) - new Date(a.soldDate))
+    .slice(0, count);
+}
+
 function renderPropertyCard(p) {
-  const soldClass = p.status === "sold" ? "sold-overlay" : "";
-  const badgeClass = p.status === "sold" ? "sold" : "";
+  const sold = p.status === "sold";
+  const soldClass = sold ? "sold-overlay" : "";
+  const badgeClass = sold ? "sold" : "";
   const fav = isFavourite(p.id);
   return `
   <div class="card prop-card" data-prop-id="${p.id}">
@@ -46,7 +57,7 @@ function renderPropertyGrid(containerId, list) {
     el.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${ICONS.home}<p>No properties match these filters right now. Try adjusting your search or contact Kamran Abbasi directly.</p></div>`;
     return;
   }
-  el.innerHTML = list.map(renderPropertyCard).join("");
+  el.innerHTML = sortActiveFirst(list).map(renderPropertyCard).join("");
 }
 
 function propertyUrl(p) {
