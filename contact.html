@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Homes PK Marketing | Kamran Abbasi</title>
+<meta name="description" content="Get in touch with Kamran Abbasi of Homes PK Marketing — call, WhatsApp, or visit our Gulberg Greens office in Islamabad.">
+<link rel="canonical" href="https://kamranproperty.com/contact.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="contact">
+
+<div id="site-header"></div>
+
+<main>
+  <section class="tight">
+    <div class="container contact-grid">
+      <div>
+        <p class="eyebrow" style="text-transform:uppercase; letter-spacing:0.14em; font-size:0.75rem; color:var(--muted); font-weight:600;">Get In Touch</p>
+        <h2>Contact <span class="accent-italic">Us</span></h2>
+        <p style="color:var(--muted);">Have a question about buying, selling, or renting? Reach out directly — Kamran Abbasi personally responds to every enquiry.</p>
+
+        <ul class="contact-info-list"></ul>
+      </div>
+      <div>
+        <div class="calc-box">
+          <h3>Send a Message</h3>
+          <form id="contactForm" style="margin-top:16px;">
+            <div class="form-field">
+              <label for="cfName">Name</label>
+              <input type="text" id="cfName" required placeholder="Your full name">
+            </div>
+            <div class="form-field">
+              <label for="cfPhone">Phone</label>
+              <input type="tel" id="cfPhone" required placeholder="03XX-XXXXXXX">
+            </div>
+            <div class="form-field">
+              <label for="cfMessage">Message</label>
+              <textarea id="cfMessage" required placeholder="Tell us what you're looking for..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+            <p class="form-msg" id="contactFormMsg"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top:48px;">
+      <div class="map-embed">
+        <iframe loading="lazy" src="https://www.google.com/maps?q=Gulberg+Trade+Centre+Business+Park+Gulberg+Greens+Islamabad&output=embed" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<div id="floating-whatsapp"></div>
+
+<script src="js/data.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+<script src="js/contact.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector(".contact-info-list").innerHTML = `
+      <li><span class="ic">${ICONS.pin}</span><span>${BUSINESS.address}</span></li>
+      <li><span class="ic">${ICONS.phone}</span><span><a href="tel:${BUSINESS.phones[0].replace(/-/g, "")}">${BUSINESS.phones[0]}</a> &nbsp;/&nbsp; <a href="tel:${BUSINESS.phones[1].replace(/-/g, "")}">${BUSINESS.phones[1]}</a></span></li>
+      <li><span class="ic">${ICONS.mail}</span><span><a href="mailto:${BUSINESS.email}">${BUSINESS.email}</a></span></li>
+    `;
+    const waRow = document.createElement("div");
+    waRow.style.marginTop = "24px";
+    waRow.style.display = "flex";
+    waRow.style.gap = "12px";
+    waRow.style.flexWrap = "wrap";
+    waRow.innerHTML = `
+      <a class="btn btn-whatsapp" href="${waLink(BUSINESS.whatsappNumbers[0], defaultWaMessage())}" target="_blank" rel="noopener">${ICONS.whatsapp} WhatsApp ${BUSINESS.phones[0]}</a>
+      <a class="btn btn-outline" href="${waLink(BUSINESS.whatsappNumbers[1], defaultWaMessage())}" target="_blank" rel="noopener">${ICONS.whatsapp} WhatsApp ${BUSINESS.phones[1]}</a>
+    `;
+    document.querySelector(".contact-info-list").after(waRow);
+  });
+</script>
+</body>
+</html>
