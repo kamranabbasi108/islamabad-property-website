@@ -4,6 +4,28 @@ function similarPropertyWaMessage(p) {
   return `Hi, I saw that "${p.title}" in ${p.location} has been sold. I'm looking for something similar — can you help?`;
 }
 
+function videoEmbedMarkup(url) {
+  if (!url) return "";
+  const trimmed = url.trim();
+  if (!trimmed) return "";
+
+  let m = trimmed.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{6,})/);
+  if (m) {
+    return `<iframe src="https://www.youtube.com/embed/${m[1]}" title="Property video tour" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  }
+
+  m = trimmed.match(/tiktok\.com\/(?:@[\w.-]+\/video\/|embed\/v2\/)(\d+)/);
+  if (m) {
+    return `<iframe src="https://www.tiktok.com/embed/v2/${m[1]}" title="Property video tour" allowfullscreen></iframe>`;
+  }
+
+  if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(trimmed)) {
+    return `<video controls src="${trimmed}"></video>`;
+  }
+
+  return `<iframe src="${trimmed}" title="Property video tour" allowfullscreen></iframe>`;
+}
+
 function getPropertyId() {
   const params = new URLSearchParams(window.location.search);
   return params.get("id");
@@ -43,6 +65,8 @@ async function renderPropertyDetail() {
       ${p.images.map((img, i) => `<img src="${img}" class="${i === 0 ? "active" : ""}" data-thumb="${img}" alt="View ${i + 1}">`).join("")}
     </div>
 
+    ${p.videoUrl ? `<div class="video-wrap" style="margin-top:20px;">${videoEmbedMarkup(p.videoUrl)}</div>` : ""}
+
     <div class="detail-header">
       <div>
         <div class="detail-badges">
@@ -72,8 +96,6 @@ async function renderPropertyDetail() {
         </ul>`
             : ""
         }
-
-        ${p.videoUrl ? `<h2 style="margin-top:30px;">Video Tour</h2><div class="video-wrap"><iframe src="${p.videoUrl}" title="Property video tour" allowfullscreen></iframe></div>` : ""}
 
         <h2 style="margin-top:30px;">Location</h2>
         <div class="map-embed">

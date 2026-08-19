@@ -21,7 +21,7 @@ The public site and admin panel expect a `properties` table and a public `proper
 
 **As of this branch, that table and bucket do not exist yet in the connected project** — `properties` returns a schema-cache 404 and `property-images` returns "Bucket not found" when queried directly. No migrations were run here per the original instructions, so someone with access to the Supabase dashboard needs to create them before the site will show real data:
 
-- Table `properties`: `id` (uuid, pk, default `gen_random_uuid()`), `title` (text), `price` (numeric), `location` (text), `property_type` (text), `purpose` (text: `sale`|`rent`), `status` (text: `active`|`sold`), `bedrooms` (int), `bathrooms` (int), `area_size` (numeric), `area_unit` (text), `description` (text), `featured` (boolean), `images` (text[]), `created_at` (timestamptz, default `now()`)
+- Table `properties`: `id` (uuid, pk, default `gen_random_uuid()`), `title` (text), `price` (numeric), `location` (text), `property_type` (text), `purpose` (text: `sale`|`rent`), `status` (text: `active`|`sold`), `bedrooms` (int), `bathrooms` (int), `area_size` (numeric), `area_unit` (text), `description` (text), `video_url` (text, nullable — YouTube/TikTok/any video link), `featured` (boolean), `images` (text[]), `created_at` (timestamptz, default `now()`)
 - RLS: public `SELECT`, `INSERT`/`UPDATE`/`DELETE` restricted to authenticated users
 - Storage bucket `property-images`: public, with upload/delete restricted to authenticated users
 - At least one Supabase Auth user (email + password) for `admin.html` to sign in with — the panel doesn't offer sign-up

@@ -354,6 +354,11 @@ function buildFormMarkup(row) {
       </div>
 
       <div class="form-field">
+        <label for="fVideoUrl">Video URL</label>
+        <input type="url" id="fVideoUrl" value="${r.video_url ? r.video_url.replace(/"/g, "&quot;") : ""}" placeholder="YouTube, TikTok, or any video link (optional)">
+      </div>
+
+      <div class="form-field">
         <label>Photos</label>
         <div class="upload-dropzone" id="uploadDropzone">
           ${ICONS.upload}
@@ -469,6 +474,7 @@ async function handleFormSubmit(e) {
     area_size: Number(document.getElementById("fAreaSize").value) || 0,
     area_unit: document.getElementById("fAreaUnit").value,
     description: document.getElementById("fDescription").value.trim(),
+    video_url: document.getElementById("fVideoUrl").value.trim() || null,
     featured: document.getElementById("fFeatured").checked,
   };
 
