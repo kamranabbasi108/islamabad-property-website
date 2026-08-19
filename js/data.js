@@ -13,6 +13,7 @@ const BUSINESS = {
   facebook: "https://www.facebook.com/share/1Eu5KTfqS9/",
   instagram: "https://www.instagram.com/kamranabbasi240",
   youtube: "https://youtube.com/@kamranabbasivlogs",
+  linkedin: "https://www.linkedin.com/in/kamran-abbasi-a43296110",
 };
 
 function waLink(number, message) {
