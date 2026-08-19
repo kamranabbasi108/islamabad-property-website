@@ -22,8 +22,23 @@ function renderFavouritesPage() {
     .join("");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+async function initFavouritesPage() {
+  const empty = document.getElementById("favouritesEmpty");
+  if (!getFavourites().length) {
+    empty.style.display = "block";
+    return;
+  }
+  renderLoadingState("favouritesGrid", "Loading your saved properties…");
+  await loadProperties();
+  if (propertiesLoadError) {
+    renderErrorState("favouritesGrid");
+    return;
+  }
   renderFavouritesPage();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initFavouritesPage();
   document.getElementById("favouritesGrid").addEventListener("click", (e) => {
     const removeBtn = e.target.closest("[data-remove-fav]");
     if (removeBtn) {

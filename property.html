@@ -4,20 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Property Details | Homes PK Marketing</title>
-<meta name="robots" content="noindex">
+<meta name="description" content="View property details, pricing, and photos from Homes PK Marketing — Gulberg Greens & DHA Islamabad.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Homes PK Marketing — Property Details">
+<meta property="og:description" content="Expert guidance for Gulberg Greens, Gulberg Islamabad & DHA Islamabad — led by Kamran Abbasi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-page="properties">
+
+<div id="site-header"></div>
+
+<main>
+  <section class="tight">
+    <div class="container" id="property-detail-root"></div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<div id="floating-whatsapp"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
 <script src="js/data.js"></script>
-<script>
-  var params = new URLSearchParams(window.location.search);
-  var id = params.get("id");
-  if (id && PROPERTIES.some(function (p) { return p.id === id; })) {
-    window.location.replace("listing/" + id + ".html");
-  } else {
-    window.location.replace("properties.html");
-  }
-</script>
-<noscript><meta http-equiv="refresh" content="0; url=properties.html"></noscript>
+<script src="js/icons.js"></script>
+<script src="js/main.js"></script>
+<script src="js/properties-data.js"></script>
+<script src="js/properties.js"></script>
+<script src="js/property-detail.js"></script>
 </body>
 </html>
