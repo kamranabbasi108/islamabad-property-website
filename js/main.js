@@ -105,6 +105,7 @@ function buildFooter(base) {
             <a href="${BUSINESS.facebook}" target="_blank" rel="noopener" aria-label="Facebook">${ICONS.facebook}</a>
             <a href="${BUSINESS.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${ICONS.instagram}</a>
             <a href="${BUSINESS.youtube}" target="_blank" rel="noopener" aria-label="YouTube">${ICONS.youtube}</a>
+            <a href="${BUSINESS.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn">${ICONS.linkedin}</a>
           </div>
         </div>
         <div>

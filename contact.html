@@ -78,6 +78,7 @@
     waRow.innerHTML = `
       <a class="btn btn-whatsapp" href="${waLink(BUSINESS.whatsappNumbers[0], defaultWaMessage())}" target="_blank" rel="noopener">${ICONS.whatsapp} WhatsApp ${BUSINESS.phones[0]}</a>
       <a class="btn btn-outline" href="${waLink(BUSINESS.whatsappNumbers[1], defaultWaMessage())}" target="_blank" rel="noopener">${ICONS.whatsapp} WhatsApp ${BUSINESS.phones[1]}</a>
+      <a class="btn btn-outline" href="${BUSINESS.linkedin}" target="_blank" rel="noopener">${ICONS.linkedin} Connect on LinkedIn</a>
     `;
     document.querySelector(".contact-info-list").after(waRow);
   });
