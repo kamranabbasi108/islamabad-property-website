@@ -29,7 +29,7 @@ function mapPropertyRow(row) {
     description: row.description || "",
     features: [],
     verified: false,
-    videoUrl: "",
+    videoUrl: row.video_url || "",
     featured: !!row.featured,
     rentPeriod: isRent ? "per month" : undefined,
     soldDate: sold ? row.created_at : undefined,
