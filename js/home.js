@@ -51,6 +51,7 @@ async function initHomeListings() {
     renderErrorState("recentSoldGrid");
     return;
   }
+  populateLocationSelect(document.getElementById("searchLocation"));
   renderNeighbourhoods();
   renderFeatured();
   renderRecentSold();

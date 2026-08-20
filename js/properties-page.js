@@ -34,7 +34,6 @@ function applyPropertyFilters() {
 async function initPropertiesPage() {
   const params = new URLSearchParams(window.location.search);
   if (params.get("type")) document.getElementById("fType").value = params.get("type");
-  if (params.get("location")) document.getElementById("fLocation").value = params.get("location");
   if (params.get("status")) document.getElementById("fStatus").value = params.get("status");
   if (params.get("price")) document.getElementById("fPrice").value = params.get("price");
 
@@ -50,6 +49,8 @@ async function initPropertiesPage() {
     renderErrorState("propertiesGrid");
     return;
   }
+  populateLocationSelect(document.getElementById("fLocation"));
+  if (params.get("location")) document.getElementById("fLocation").value = params.get("location");
   applyPropertyFilters();
 }
 
