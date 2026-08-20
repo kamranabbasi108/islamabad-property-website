@@ -64,3 +64,28 @@ async function fetchPropertyById(id) {
     return null;
   }
 }
+
+function getDistinctLocations() {
+  const seen = new Set();
+  PROPERTIES.forEach((p) => {
+    if (p.location && p.location.trim()) seen.add(p.location.trim());
+  });
+  return Array.from(seen).sort((a, b) => a.localeCompare(b));
+}
+
+function populateLocationSelect(select) {
+  if (!select) return;
+  const locations = getDistinctLocations();
+  if (!locations.length) return;
+  const current = select.value;
+  const placeholderOption = select.options[0];
+  select.innerHTML = "";
+  if (placeholderOption) select.appendChild(placeholderOption);
+  locations.forEach((loc) => {
+    const opt = document.createElement("option");
+    opt.value = loc;
+    opt.textContent = loc;
+    select.appendChild(opt);
+  });
+  if (locations.includes(current)) select.value = current;
+}
