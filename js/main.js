@@ -55,6 +55,7 @@ function buildNavbar(active, base) {
   base = base || "";
   const links = [
     { href: "index.html", label: "Home", key: "home" },
+    { href: "admin.html", label: "Admin Panel", key: "admin" },
     { href: "properties.html", label: "Properties", key: "properties" },
     { href: "new-projects.html", label: "New Projects", key: "projects" },
     { href: "favourites.html", label: "Favourites", key: "favourites" },
