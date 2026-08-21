@@ -139,7 +139,8 @@ function buildFooter(base) {
         </div>
       </div>
       <div class="footer-bottom">
-        &copy; ${new Date().getFullYear()} Homes PK Marketing. All rights reserved. — Led by Kamran Abbasi.
+        <span>&copy; ${new Date().getFullYear()} Homes PK Marketing. All rights reserved. — Led by Kamran Abbasi.</span>
+        <a href="${base}admin.html" style="color:inherit; opacity:0.55; font-size:0.78rem; margin-left:14px;">Admin Login</a>
       </div>
     </div>
   </footer>`;
