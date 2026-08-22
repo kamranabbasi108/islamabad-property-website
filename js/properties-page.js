@@ -49,8 +49,19 @@ async function initPropertiesPage() {
     renderErrorState("propertiesGrid");
     return;
   }
-  populateLocationSelect(document.getElementById("fLocation"));
-  if (params.get("location")) document.getElementById("fLocation").value = params.get("location");
+  const fLocation = document.getElementById("fLocation");
+  populateLocationSelect(fLocation);
+  const wantedLocation = params.get("location");
+  if (wantedLocation) {
+    const hasOption = Array.from(fLocation.options).some((o) => o.value === wantedLocation);
+    if (!hasOption) {
+      const opt = document.createElement("option");
+      opt.value = wantedLocation;
+      opt.textContent = wantedLocation;
+      fLocation.appendChild(opt);
+    }
+    fLocation.value = wantedLocation;
+  }
   applyPropertyFilters();
 }
 
