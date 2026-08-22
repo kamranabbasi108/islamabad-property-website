@@ -253,11 +253,26 @@ section.tight { padding: 48px 0; }
   min-height: 620px;
   display: flex;
   align-items: center;
-  background: linear-gradient(180deg, rgba(15,30,56,0.72), rgba(15,30,56,0.82)),
-    url("https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat;
+  overflow: hidden;
   color: var(--white);
 }
-.hero-content { max-width: 760px; padding: 100px 0 70px; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15,30,56,0.72), rgba(15,30,56,0.82)),
+    url("https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat;
+  animation: heroKenBurns 24s ease-in-out infinite alternate;
+  z-index: 0;
+}
+@keyframes heroKenBurns {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero::before { animation: none; }
+}
+.hero-content { position: relative; z-index: 1; max-width: 760px; padding: 100px 0 70px; }
 .hero h1 { color: var(--white); }
 .hero p.subtitle {
   color: #FFFFFF;
