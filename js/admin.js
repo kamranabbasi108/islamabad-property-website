@@ -55,7 +55,7 @@ function renderHeader() {
   <header class="navbar">
     <div class="container">
       <div class="logo">${ICONS.home}<span>Homes PK <span class="accent-italic">Marketing</span></span></div>
-      <div style="display:flex; gap:10px;">
+      <div class="admin-header-actions">
         ${currentUser ? `<button class="btn admin-logout-btn btn-sm" id="changePasswordBtn">Change Password</button>` : ""}
         ${currentUser ? `<button class="btn admin-logout-btn btn-sm" id="logoutBtn">${ICONS.logout} Logout</button>` : ""}
       </div>
