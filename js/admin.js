@@ -55,11 +55,94 @@ function renderHeader() {
   <header class="navbar">
     <div class="container">
       <div class="logo">${ICONS.home}<span>Homes PK <span class="accent-italic">Marketing</span></span></div>
-      <div>${currentUser ? `<button class="btn admin-logout-btn btn-sm" id="logoutBtn">${ICONS.logout} Logout</button>` : ""}</div>
+      <div style="display:flex; gap:10px;">
+        ${currentUser ? `<button class="btn admin-logout-btn btn-sm" id="changePasswordBtn">Change Password</button>` : ""}
+        ${currentUser ? `<button class="btn admin-logout-btn btn-sm" id="logoutBtn">${ICONS.logout} Logout</button>` : ""}
+      </div>
     </div>
   </header>`;
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) logoutBtn.addEventListener("click", handleLogout);
+  const changePasswordBtn = document.getElementById("changePasswordBtn");
+  if (changePasswordBtn) changePasswordBtn.addEventListener("click", openChangePasswordModal);
+}
+
+/* ---------- change password ---------- */
+
+function openChangePasswordModal() {
+  closeChangePasswordModal();
+  const overlay = document.createElement("div");
+  overlay.className = "modal-overlay";
+  overlay.id = "changePasswordModal";
+  overlay.innerHTML = `
+    <div class="modal-box">
+      <h2 style="margin-bottom:6px;">Change <span class="accent-italic">Password</span></h2>
+      <p class="lead" style="margin-bottom:22px;">Set a new password for this admin login.</p>
+      <form id="changePasswordForm">
+        <div class="form-field">
+          <label for="newPassword">New Password</label>
+          <input type="password" id="newPassword" required minlength="6" autocomplete="new-password">
+        </div>
+        <div class="form-field">
+          <label for="confirmPassword">Confirm New Password</label>
+          <input type="password" id="confirmPassword" required minlength="6" autocomplete="new-password">
+        </div>
+        <div style="display:flex; gap:12px; margin-top:10px;">
+          <button type="submit" class="btn btn-primary" id="savePasswordBtn" data-busy-disable>Save New Password</button>
+          <button type="button" class="btn btn-outline" id="cancelPasswordBtn" data-busy-disable>Cancel</button>
+        </div>
+        <p class="form-msg" id="passwordFormMsg"></p>
+      </form>
+    </div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeChangePasswordModal();
+  });
+  document.getElementById("cancelPasswordBtn").addEventListener("click", closeChangePasswordModal);
+  document.getElementById("changePasswordForm").addEventListener("submit", handleChangePassword);
+}
+
+function closeChangePasswordModal() {
+  const existing = document.getElementById("changePasswordModal");
+  if (existing) existing.remove();
+}
+
+async function handleChangePassword(e) {
+  e.preventDefault();
+  if (busy) return;
+  const newPassword = document.getElementById("newPassword").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+  const msg = document.getElementById("passwordFormMsg");
+  const btn = document.getElementById("savePasswordBtn");
+  msg.classList.remove("show", "error");
+
+  if (newPassword !== confirmPassword) {
+    msg.textContent = "Passwords don't match. Please re-enter.";
+    msg.classList.add("show", "error");
+    return;
+  }
+  if (newPassword.length < 6) {
+    msg.textContent = "Password must be at least 6 characters.";
+    msg.classList.add("show", "error");
+    return;
+  }
+
+  setBusy(true);
+  btn.innerHTML = `<span class="spinner"></span> Saving…`;
+
+  const { error } = await sbClient.auth.updateUser({ password: newPassword });
+
+  setBusy(false);
+  btn.textContent = "Save New Password";
+
+  if (error) {
+    msg.textContent = error.message || "Couldn't update password. Please try again.";
+    msg.classList.add("show", "error");
+    return;
+  }
+
+  closeChangePasswordModal();
+  showToast("Password updated. Use it next time you log in.");
 }
 
 /* ---------- auth ---------- */
