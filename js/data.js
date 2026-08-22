@@ -96,7 +96,13 @@ const NEIGHBOURHOOD_INFO = [
     name: "Gulberg Greens",
     image: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1200&q=80",
     tagline: "Islamabad's fastest-growing green community",
-    match: "gulberg",
+    match: "gulberg greens",
+  },
+  {
+    name: "Gulberg Islamabad",
+    image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
+    tagline: "Established sectors close to the capital's core",
+    match: "gulberg islamabad",
   },
   {
     name: "DHA Islamabad",
