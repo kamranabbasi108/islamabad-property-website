@@ -87,7 +87,7 @@ function openChangePasswordModal() {
           <label for="confirmPassword">Confirm New Password</label>
           <input type="password" id="confirmPassword" required minlength="6" autocomplete="new-password">
         </div>
-        <div style="display:flex; gap:12px; margin-top:10px;">
+        <div style="display:flex; gap:12px; margin-top:10px; flex-wrap:wrap;">
           <button type="submit" class="btn btn-primary" id="savePasswordBtn" data-busy-disable>Save New Password</button>
           <button type="button" class="btn btn-outline" id="cancelPasswordBtn" data-busy-disable>Cancel</button>
         </div>
@@ -192,7 +192,7 @@ function openForgotPasswordModal() {
           <label for="forgotEmail">Email</label>
           <input type="email" id="forgotEmail" required autocomplete="username">
         </div>
-        <div style="display:flex; gap:12px; margin-top:10px;">
+        <div style="display:flex; gap:12px; margin-top:10px; flex-wrap:wrap;">
           <button type="submit" class="btn btn-primary" id="sendResetBtn" data-busy-disable>Send Reset Link</button>
           <button type="button" class="btn btn-outline" id="cancelForgotBtn" data-busy-disable>Cancel</button>
         </div>
@@ -521,7 +521,7 @@ function buildFormMarkup(row) {
         <div class="upload-grid" id="imagePreviewGrid"></div>
       </div>
 
-      <div style="display:flex; gap:12px; margin-top:10px;">
+      <div style="display:flex; gap:12px; margin-top:10px; flex-wrap:wrap;">
         <button type="submit" class="btn btn-primary" id="savePropertyBtn" data-busy-disable>${row ? "Save Changes" : "Add Property"}</button>
         <button type="button" class="btn btn-outline" id="cancelFormBtn" data-busy-disable>Cancel</button>
       </div>
