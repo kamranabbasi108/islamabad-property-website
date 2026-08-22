@@ -345,11 +345,13 @@ function renderAdminRow(row) {
   const areaLabel = [row.area_size, row.area_unit].filter(Boolean).join(" ");
   return `
   <div class="admin-row" data-row-id="${row.id}">
-    <img class="row-thumb" src="${thumb}" alt="${row.title}">
+    <div class="row-thumb-wrap">
+      <img class="row-thumb" src="${thumb}" alt="${row.title}">
+      ${statusPill(row)}
+    </div>
     <div class="row-info">
       <div class="row-title">${row.title}</div>
-      <div class="row-meta">${row.location || ""}${areaLabel ? " — " + areaLabel : ""}</div>
-      <div style="margin-top:6px;">${statusPill(row)}</div>
+      <div class="row-meta">${ICONS.pin} ${row.location || ""}${areaLabel ? " — " + areaLabel : ""}</div>
     </div>
     <div class="row-price">PKR ${formatPKR(Number(row.price) || 0)}</div>
     <div class="row-actions">
