@@ -100,7 +100,7 @@ function buildFooter(base) {
       <div class="footer-grid">
         <div>
           <div class="footer-logo">${ICONS.home}<span>Homes PK Marketing</span></div>
-          <p style="max-width:280px; font-size:0.88rem;">${BUSINESS.tagline} — trusted property guidance for Gulberg Greens, Gulberg Islamabad &amp; DHA Islamabad.</p>
+          <p style="max-width:280px; font-size:0.88rem;">${BUSINESS.tagline} — trusted property guidance for Gulberg Greens, Gulberg Residencia &amp; DHA Islamabad.</p>
           <div class="social-row">
             <a href="${waLink(BUSINESS.whatsappNumbers[0], defaultWaMessage())}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICONS.whatsapp}</a>
             <a href="${BUSINESS.facebook}" target="_blank" rel="noopener" aria-label="Facebook">${ICONS.facebook}</a>
