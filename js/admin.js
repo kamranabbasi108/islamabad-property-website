@@ -166,9 +166,77 @@ function renderLoginForm() {
       </div>
       <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn" data-busy-disable>Log In</button>
       <p class="form-msg" id="loginMsg"></p>
+      <p style="text-align:center; margin-top:16px; font-size:0.88rem;">
+        <a href="#" id="forgotPasswordLink">Forgot password?</a>
+      </p>
     </form>
   </div>`;
   document.getElementById("loginForm").addEventListener("submit", handleLogin);
+  document.getElementById("forgotPasswordLink").addEventListener("click", (e) => {
+    e.preventDefault();
+    openForgotPasswordModal();
+  });
+}
+
+function openForgotPasswordModal() {
+  closeForgotPasswordModal();
+  const overlay = document.createElement("div");
+  overlay.className = "modal-overlay";
+  overlay.id = "forgotPasswordModal";
+  overlay.innerHTML = `
+    <div class="modal-box">
+      <h2 style="margin-bottom:6px;">Reset <span class="accent-italic">Password</span></h2>
+      <p class="lead" style="margin-bottom:22px;">Enter the admin email — we'll send a password reset link to it.</p>
+      <form id="forgotPasswordForm">
+        <div class="form-field">
+          <label for="forgotEmail">Email</label>
+          <input type="email" id="forgotEmail" required autocomplete="username">
+        </div>
+        <div style="display:flex; gap:12px; margin-top:10px;">
+          <button type="submit" class="btn btn-primary" id="sendResetBtn" data-busy-disable>Send Reset Link</button>
+          <button type="button" class="btn btn-outline" id="cancelForgotBtn" data-busy-disable>Cancel</button>
+        </div>
+        <p class="form-msg" id="forgotFormMsg"></p>
+      </form>
+    </div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeForgotPasswordModal();
+  });
+  document.getElementById("cancelForgotBtn").addEventListener("click", closeForgotPasswordModal);
+  document.getElementById("forgotPasswordForm").addEventListener("submit", handleForgotPassword);
+}
+
+function closeForgotPasswordModal() {
+  const existing = document.getElementById("forgotPasswordModal");
+  if (existing) existing.remove();
+}
+
+async function handleForgotPassword(e) {
+  e.preventDefault();
+  if (busy) return;
+  const email = document.getElementById("forgotEmail").value.trim();
+  const msg = document.getElementById("forgotFormMsg");
+  const btn = document.getElementById("sendResetBtn");
+  msg.classList.remove("show", "error");
+
+  setBusy(true);
+  btn.innerHTML = `<span class="spinner"></span> Sending…`;
+
+  const redirectTo = window.location.origin + window.location.pathname;
+  const { error } = await sbClient.auth.resetPasswordForEmail(email, { redirectTo });
+
+  setBusy(false);
+  btn.textContent = "Send Reset Link";
+
+  if (error) {
+    msg.textContent = error.message || "Couldn't send reset email. Please try again.";
+    msg.classList.add("show", "error");
+    return;
+  }
+
+  msg.textContent = "Reset link sent! Check the inbox (and spam folder) for that email.";
+  msg.classList.add("show", "success");
 }
 
 async function handleLogin(e) {
@@ -203,15 +271,17 @@ async function initAuth() {
   renderHeader();
   if (currentUser) {
     showDashboard();
+    if (window.location.hash.includes("type=recovery")) openChangePasswordModal();
   } else {
     renderLoginForm();
   }
 
-  sbClient.auth.onAuthStateChange((_event, session) => {
+  sbClient.auth.onAuthStateChange((event, session) => {
     currentUser = session ? session.user : null;
     renderHeader();
     if (currentUser) {
       showDashboard();
+      if (event === "PASSWORD_RECOVERY") openChangePasswordModal();
     } else {
       document.getElementById("adminDashboard").style.display = "none";
       renderLoginForm();
