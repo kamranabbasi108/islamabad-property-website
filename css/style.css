@@ -706,6 +706,7 @@ section.tight { padding: 48px 0; }
 .floating-whatsapp:hover { transform: scale(1.08); }
 @media (max-width: 760px) {
   .floating-whatsapp { width: 52px; height: 52px; bottom: 16px; right: 16px; }
+  .neigh-card .overlay { padding-right: 84px; }
 }
 
 /* ---------- Sticky mobile call bar ---------- */
