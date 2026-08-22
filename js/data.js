@@ -99,6 +99,12 @@ const NEIGHBOURHOOD_INFO = [
     match: "gulberg greens",
   },
   {
+    name: "Gulberg Residencia",
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+    tagline: "Popular residential society close to the main boulevard",
+    match: "gulberg residencia",
+  },
+  {
     name: "Gulberg Islamabad",
     image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
     tagline: "Established sectors close to the capital's core",
