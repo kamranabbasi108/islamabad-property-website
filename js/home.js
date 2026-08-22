@@ -46,13 +46,13 @@ async function initHomeListings() {
   renderLoadingState("featuredGrid", "Loading featured properties…");
   renderLoadingState("recentSoldGrid", "Loading…");
   await loadProperties();
+  populateLocationSelect(document.getElementById("searchLocation"));
+  renderNeighbourhoods();
   if (propertiesLoadError) {
     renderErrorState("featuredGrid");
     renderErrorState("recentSoldGrid");
     return;
   }
-  populateLocationSelect(document.getElementById("searchLocation"));
-  renderNeighbourhoods();
   renderFeatured();
   renderRecentSold();
 }
