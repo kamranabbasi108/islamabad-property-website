@@ -758,6 +758,22 @@ section.tight { padding: 48px 0; }
 .login-card p.lead { margin-bottom: 26px; }
 .login-card form { text-align: left; }
 
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15,30,56,0.55);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  z-index: 500;
+}
+.modal-box {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 34px 30px;
+  box-shadow: var(--shadow);
+  max-width: 420px;
+  width: 100%;
+}
+
 .admin-toolbar {
   display: flex;
   justify-content: space-between;
