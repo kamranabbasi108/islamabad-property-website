@@ -105,12 +105,6 @@ const NEIGHBOURHOOD_INFO = [
     match: "gulberg residencia",
   },
   {
-    name: "Gulberg Islamabad",
-    image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
-    tagline: "Established sectors close to the capital's core",
-    match: "gulberg islamabad",
-  },
-  {
     name: "DHA Islamabad",
     image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
     tagline: "Premium planned living across all phases",
